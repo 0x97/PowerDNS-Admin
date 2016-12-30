@@ -1,7 +1,7 @@
 # 0x97 PowerDNS-Admin
 PowerDNS Administration portal, overhaul of ngoduykhanh/PowerDNS-Admin
 
-Note: This project is primarily maintained through [our Gitlab server](https://git.omicroninteractive.com/0x97/powerdns-admin). We will update this repository following each new tag, but we will not actively check GitHub for new issues or merge requests. Our Gitlab server allows single sign on from GitHub, so please [join us there](https://git.omicroninteractive.com/0x97/powerdns-admin) if you'd like to contribute or submit issues.
+*Important Note*: This project is primarily maintained through [our Gitlab server](https://git.omicroninteractive.com/0x97/powerdns-admin). We will update this repository following each new tag, but we will not actively check GitHub for new issues or merge requests. Our Gitlab server allows single sign on from GitHub, so please [join us there](https://git.omicroninteractive.com/0x97/powerdns-admin) if you'd like to contribute or submit issues.
 
 #### Original Features:
 - Multiple domain management
