@@ -1,6 +1,7 @@
 # 0x97 PowerDNS-Admin
 PowerDNS Administration portal, overhaul of ngoduykhanh/PowerDNS-Admin
 
+Note: This project is primarily maintained through [our Gitlab server](https://git.omicroninteractive.com/0x97/powerdns-admin). We will update this repository following each new tag, but we will not actively check GitHub for new issues or merge requests. Our Gitlab server allows single sign on from GitHub, so please [join us there](https://git.omicroninteractive.com/0x97/powerdns-admin) if you'd like to contribute or submit issues.
 
 #### Original Features:
 - Multiple domain management
@@ -14,13 +15,14 @@ PowerDNS Administration portal, overhaul of ngoduykhanh/PowerDNS-Admin
 - Edit IPv6 PTRs using IPv6 addresses directly (no more editing of literal addresses!)
  
 #### Added Features:
- - Template selection options, with ability for users to customize appearance if admin enables customization
- - Background pattern/color/gradient options
- - Enhanced welcome/login screen
- - Custom language strings options
- - Mini-CMS feature for help/FAQ/etc pages
  - Users can add their own domains
+ - CSS skin & background options, with ability for users to customize appearance if admin enables the setting
+ - Enhanced welcome/login screen: edit the homepage through Admin Settings
+ - Editable language strings (currently most menu items/headings are editable, more in the future)
+ - Mini-CMS feature, allows admins to add/edit/delete various pages, and set permissions 
  - Upgraded user permissions- admin can set limits on domains/records
+ - Additional user classes: Premium (no domain/record limits), Suspended (locks everything within PowerDNS-Admin)
+ 
 
 ## Setup
 
