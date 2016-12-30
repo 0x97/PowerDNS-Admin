@@ -101,14 +101,27 @@ Run the application and enjoy!
 ```
 
 ### Screenshots
-![fullscreen-welcome](/uploads/88a350024cb5cd48257c9b623ae138dd/fullscreen-welcome.png)
 
-![fullscreen-dashboard](/uploads/bd93ecb603c2a3e937fd39ca2e6673ca/fullscreen-dashboard.png)
+Homepage
+![Homepage](http://i.imgur.com/Kvun0op.png)
 
-![fullscreen-domaincreate](/uploads/3c2009e6f5d5ddb761726de3a5d81e31/fullscreen-domaincreate.png)
+User Dashboard
+![User Dashboard](http://i.imgur.com/Gc4w36K.png)
 
-![fullscreen-custom-theme](/uploads/2b61017196dafa8609989c6ec04cf4fb/fullscreen-custom-theme.png)
+Admin Dashboard
+![Admin Dashboard](http://i.imgur.com/LOmYLmt.png)
 
-![fullscreen-language-settings](/uploads/3069d929712f20ec8016ee299d498aa2/fullscreen-language-settings.png)
+Admin Settings
+![Admin Settings](http://i.imgur.com/pt7nV96.png)
 
-![fullscreen-settings](/uploads/e7a2e47a7cb74dc8bba27a1ddab3e2ac/fullscreen-settings.png)
+Custom Pages
+![Custom Pages](http://i.imgur.com/yy0f6fA.png)
+
+Page Editor
+![Page Editor](http://i.imgur.com/ZzzQqvs.png)
+
+User Management
+![User Management](http://i.imgur.com/r059y1C.png)
+
+User Theme Settings
+![User Theme Settings](http://i.imgur.com/K9Z3EeZ.png)
