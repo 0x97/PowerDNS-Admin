@@ -1,5 +1,5 @@
 # 0x97 PowerDNS-Admin
-PowerDNS Administration portal
+PowerDNS Administration portal, overhaul of ngoduykhanh/PowerDNS-Admin
 
 
 #### Original Features:
@@ -14,18 +14,15 @@ PowerDNS Administration portal
 - Edit IPv6 PTRs using IPv6 addresses directly (no more editing of literal addresses!)
  
 #### Added Features:
- - Template selection options
+ - Template selection options, with ability for users to customize appearance if admin enables customization
  - Background pattern/color/gradient options
  - Enhanced welcome/login screen
- - Custom template option with full settings
  - Custom language strings options
+ - Mini-CMS feature for help/FAQ/etc pages
+ - Users can add their own domains
  - Upgraded user permissions- admin can set limits on domains/records
- - Ability to add and edit custom pages
 
 ## Setup
-
-### Note:
-To make development simpler, make sure to use the sqlite3 database `powerdnsadmin.db`. [A dev config.py is available here](https://git.omicroninteractive.com/0x97/powerdns-admin/snippets/4).
 
 ### PowerDNS Version Support:
 PowerDNS-Admin supports PowerDNS autoritative server versions **3.4.2** and higher. 
