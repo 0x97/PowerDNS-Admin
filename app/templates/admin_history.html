@@ -1,15 +1,16 @@
 {% extends "base.html" %} {% block title %}
-<title>DNS Control Panel - History</title>
+<title>{{ menu_history_text_language }} :: {{ site_name_setting }}</title>
 {% endblock %} {% block dashboard_stat %}
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        History <small>Recent PowerDNS-Admin events</small>
+        {{  menu_history_text_language }} <small>Recent 0x97 Admin events</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url_for('dashboard') }}"><i
-                class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">History</li>
+                class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+        <li><a href="{{ url_for('admin') }}">{{  menu_adminconsole_text_language }}</a></li>
+        <li class="active">{{  menu_history_text_language }}</li>
     </ol>
 </section>
 {% endblock %} {% block content %}
@@ -18,11 +19,11 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">History Management</h3>
+                    <h3 class="box-title">{{  menu_history_text_language }} Management</h3>
                 </div>
                 <div class="box-body clearfix">
                     <button type="button" class="btn btn-flat btn-danger pull-right" data-toggle="modal" data-target="#modal_clear_history">
-                        Clear History&nbsp;<i class="fa fa-trash"></i>
+                        Clear {{  menu_history_text_language }}&nbsp;<i class="fa fa-trash"></i>
                     </button>
                 </div>
                 <div class="box-body">
@@ -36,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for history in histories %}
+                            {% for history in histories|sort(attribute='id', reverse=True) %}
                             <tr class="odd gradeX">
                                 <td>{{ history.created_by }}</td>
                                 <td>{{ history.msg }}</td>

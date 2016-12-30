@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - Create User</title>{% endblock %}
+{% block title %}<title>Create User :: {{ site_name_setting }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        User
+        {{  menu_users_text_language }}
         <small>Create new</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li><a href="{{ url_for('dashboard') }}">Admin</a></li>
+        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+        <li><a href="{{ url_for('admin') }}">{{ menu_adminconsole_text_language }}</a></li>
+        <li><a href="{{ url_for('admin_manageuser') }}">{{  menu_users_text_language }}</a></li>
         <li class="active">Create user</li>
       </ol>
     </section>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - My Profile</title>{% endblock %}
+{% block title %}<title>My Profile :: {{ site_name_setting }}</title>{% endblock %}
 {% block dashboard_stat %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -8,7 +8,7 @@
         <small>Edit my profile</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
         <li class="active">My Profile</li>
       </ol>
     </section>
@@ -29,6 +29,9 @@
                                     Info</a></li>
                             <li><a href="#tabs-avatar" data-toggle="tab">Change
                                     Avatar</a></li>
+                            {% if enable_user_customization_setting %}
+                            <li><a href="#tabs-customize" data-toggle="tab">Customize</a></li>
+                            {% endif %}
                             <li><a href="#tabs-password" data-toggle="tab">Change
                                     Password</a></li>
                             <li><a href="#tabs-authentication" data-toggle="tab">Authentication
@@ -78,7 +81,7 @@
                                         <div>
                                             <span class="label label-danger">NOTE! </span> <span>&nbsp;Only
                                                 supports <strong>.PNG, .JPG, .JPEG</strong>. The best size
-                                                to use is <strong>200x200</strong>.
+                                                to use is <strong>200x200</strong>. Other sizes may become distorted or cause display issues in the sidebar.
                                             </span>
                                         </div>
                                     </div>
@@ -87,6 +90,115 @@
                                     </div>
                                 </form>
                             </div>
+                            {% if enable_user_customization_setting %}
+                            <div class="tab-pane" id="tabs-customize">
+                                <form action="{{ user_profile }}" method="post">
+                                    <div class="form-group user-customize">
+                                        <label for="css_skin">Theme</label>
+                                        <select name="css_skin" id="css_skin" class="css_skin">
+                                            <option value="{{ current_user.css_skin }}">{{ current_user.css_skin }}</option>
+                                            <option value="black">black</option>
+                                            <option value="black-light">black-light</option>
+                                            <option value="blue">blue</option>
+                                            <option value="blue-blue">blue-blue</option>
+                                            <option value="blue-light">blue-light</option>
+                                            <option value="green">green</option>
+                                            <option value="green-green">green-green</option>
+                                            <option value="green-light">green-light</option>
+                                            <option value="purple">purple</option>
+                                            <option value="purple-purple">purple-purple</option>
+                                            <option value="purple-light">purple-light</option>
+                                            <option value="red">red</option>
+                                            <option value="red-red">red-red</option>
+                                            <option value="red-light">red-light</option>
+                                            <option value="yellow">yellow</option>
+                                            <option value="yellow-yellow">yellow-yellow</option>
+                                            <option value="yellow-light">yellow-light</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group user-customize">
+                                        <label for="background_pattern">Background</label>
+                                        <select name="background_pattern" id="background_pattern" class="background_pattern">
+                                            <option value="{{ current_user.background_pattern }}">{{ current_user.background_pattern }}</option>
+                                            <optgroup label="Gradients">
+                                                <option value="ibiza">Ibiza</option>
+                                                <option value="cosmic_fusion">Cosmic Fusion</option>
+                                                <option value="royal">Royal</option>
+                                                <option value="dark_skies">Dark Skies</option>
+                                                <option value="deep_purple">Deep Purple</option>
+                                                <option value="twitch">Twitch</option>
+                                                <option value="soundcloud">Soundcloud</option>
+                                                <option value="strain">Strain</option>
+                                                <option value="kyoto">Kyoto</option>
+                                                <option value="pinot_noir">Pinot Noir</option>
+                                                <option value="bloody_mary">Bloody Mary</option>
+                                                <option value="harmonic_energy">Harmonic Energy</option>
+                                                <option value="easymed">Easymed</option>
+                                                <option value="lush">Lush</option>
+                                                <option value="behongo">Behongo</option>
+                                            </optgroup>
+                                            <optgroup label="Patterns">
+                                                <option value="asanoha">asanoha</option>
+                                                <option value="batthern">batthern</option>
+                                                <option value="black_thread">black_thread</option>
+                                                <option value="broken_noise">broken_noise</option>
+                                                <option value="candyhole">candyhole</option>
+                                                <option value="carbon_fibre_big">carbon_fibre_big</option>
+                                                <option value="checkered_pattern">checkered_pattern</option>
+                                                <option value="classy_fabric">classy_fabric</option>
+                                                <option value="connect">connect</option>
+                                                <option value="dark_matter">dark_matter</option>
+                                                <option value="dark_wood">dark_wood</option>
+                                                <option value="darkdenim3">darkdenim3</option>
+                                                <option value="denim">denim</option>
+                                                <option value="diagmonds">diagmonds</option>
+                                                <option value="dvsup">dvsup</option>
+                                                <option value="fabric_plaid">fabric_plaid</option>
+                                                <option value="fake_brick">fake_brick</option>
+                                                <option value="foggy_birds">foggy_birds</option>
+                                                <option value="foil">foil</option>
+                                                <option value="graphy">graphy</option>
+                                                <option value="gridme">gridme</option>
+                                                <option value="grilled">grilled</option>
+                                                <option value="groovepaper">groovepaper</option>
+                                                <option value="gun_metal">gun_metal</option>
+                                                <option value="hxis_pattern_evolution">hxis_pattern_evolution</option>
+                                                <option value="irongrip">irongrip</option>
+                                                <option value="knitted-netting">knitted-netting</option>
+                                                <option value="light_grey_floral_motif">light_grey_floral_motif</option>
+                                                <option value="lined_paper">lined_paper</option>
+                                                <option value="merely_cubed">merely_cubed</option>
+                                                <option value="nami">nami</option>
+                                                <option value="old_wall">old_wall</option>
+                                                <option value="pineapplecut">pineapplecut</option>
+                                                <option value="plaid">plaid</option>
+                                                <option value="polonez_car">polonez_car</option>
+                                                <option value="px_by_Gre3g">px_by_Gre3g</option>
+                                                <option value="ravenna">ravenna</option>
+                                                <option value="ricepaper">ricepaper</option>
+                                                <option value="ricepaper2">ricepaper2</option>
+                                                <option value="seigaiha">seigaiha</option>
+                                                <option value="small-crackle-bright">small-crackle-bright</option>
+                                                <option value="soft_pad">soft_pad</option>
+                                                <option value="starring">starring</option>
+                                                <option value="struckaxiom">struckaxiom</option>
+                                                <option value="texturetastic_gray">texturetastic_gray</option>
+                                                <option value="vertical_cloth">vertical_cloth</option>
+                                                <option value="white_brick_wall">white_brick_wall</option>
+                                                <option value="white_paperboard">white_paperboard</option>
+                                                <option value="white_plaster">white_plaster</option>
+                                                <option value="whitediamond">whitediamond</option>
+                                                <option value="wood_pattern">wood_pattern</option>
+                                                <option value="zigzag">zigzag</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-flat btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endif %}
                             <div class="tab-pane" id="tabs-password">
                                 {% if not current_user.password %} Your account password is
                                 managed via LDAP which isn't supported to change here. {% else
@@ -119,7 +231,7 @@
                                             <p><img id="qrcode" src="{{ url_for('qrcode') }}"></p>
                                             Please start FreeOTP (<a target="_blank" href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp&hl=en">Android</a> -  <a target="_blank" href="https://itunes.apple.com/en/app/freeotp-authenticator/id872559395?mt=8">iOS</a>) on your smartphone and scan the above QR Code with it.
                                             <br/>
-                                            <font color="red"><strong><i>Make sure only you can see this QR Code and nobodoy can capture it.</i></strong></font>
+                                            <font color="red"><strong><i>Make sure only you can see this QR Code and nobody can capture it.</i></strong></font>
                                         </div>
                                         {% endif %}
                                     </div>
@@ -167,6 +279,11 @@
         };
         applyChanges(postdata, $SCRIPT_ROOT + '/user/profile');
         location.reload();
+    });
+
+    $(document).ready(function() {
+      $(".background_pattern").select2();
+      $(".css_skin").select2();
     });
 </script>
 {% endblock %}

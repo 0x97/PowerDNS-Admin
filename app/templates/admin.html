@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - Admin Console</title>{% endblock %}
+{% block title %}<title>{{ menu_adminconsole_text_language }} :: {{ site_name_setting }}</title>{% endblock %}
 
 {% block dashboard_stat %}
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Admin Console
+        {{  menu_adminconsole_text_language }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url_for('dashboard') }}"><i
-                class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Admin Console</li>
+                class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+        <li class="active">{{  menu_adminconsole_text_language }}</li>
     </ol>
 </section>
 {% endblock %}

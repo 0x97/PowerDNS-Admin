@@ -17,18 +17,240 @@ table td {
 
 /* Pretty JSON */
 .json-pre {
-   background-color: ghostwhite;
-   border: 1px solid silver;
-   padding: 10px 20px;
-   margin: 20px;
+    background-color: ghostwhite;
+    border: 1px solid silver;
+    padding: 10px 20px;
+    margin: 20px;
 }
 .json-key {
-   color: brown;
+    color: brown;
 }
 .json-value {
-   color: navy;
+    color: navy;
 }
 .json-string {
-   color: olive;
+    color: olive;
 }
 
+
+.content.error, .content-header.error {
+    color:#fff;
+    background:#3d5dff;
+    font-family: "Open Sans Light",segoe ui,arial, sans-serif;
+    background-size: 25%;
+    word-wrap: break-word;
+    align-items: stretch;
+    width: 100%;
+}
+
+#error{
+    width:80%;
+    margin-right:auto;
+    margin-left:auto;
+    padding:15px;
+    border-radius:15px;
+    z-index: 2;
+}
+
+.error h1, .error h2, .error p{
+    font-weight: lighter;
+}
+
+.error h1{
+    font-size: 110px;
+    margin: 0px;
+}
+
+.error h2{
+    font-size: 22px;
+}
+
+.error a{
+    text-decoration: none;
+    color: #CFE1FC;
+}
+
+.error p{
+    font-size:14px;
+    line-height: 1.5;
+}
+
+.error strong{
+    font-weight: lighter;
+}
+
+@media only screen and (max-width:500px){
+    #error{
+        width:85%;
+    }
+}
+
+.login-sidebar p {
+    color: #b8c7ce;
+    padding: 12px 5px 12px 15px;
+}
+
+.login-sidebar label {
+    color: #b8c7ce;
+}
+
+.login-sidebar .caption {
+    width: 100%;
+    padding-top: 1em;
+    font-size: 130%;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.login-sidebar .login-box-body {
+    background: none;
+}
+
+.login-sidebar .col-xs-7 {
+    margin-left: 20px;
+}
+
+.login-sidebar .btn-primary {
+    color: #fff !important;
+}
+
+.login-sidebar .col-xs-3 {
+    padding: 0;
+}
+
+.table-help td {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 14px !important;
+}
+
+dl.dl-settings-help dt {
+    text-align: left;
+    width: 180px;
+    margin-bottom:5px;
+}
+
+dl.dl-settings-help dd {
+    margin-left: 190px;
+    margin-bottom: 5px;
+}
+
+#tbl_settings textarea {
+    width: 100%;
+}
+
+.alert {
+    background-color: #f39c12;
+    color: white;
+    font-weight: bold;
+}
+
+.alert a {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.hidden {
+    display:none;
+}
+
+table.tbl_menu_strings {
+    border-collapse: collapse;
+}
+
+table.tbl_menu_strings tr td label {
+    display: block;
+}
+
+table.tbl_menu_strings input[type=checkbox] {
+    display: none;
+}
+
+[data-toggle="toggle"] {
+	display: none;
+}
+
+.sidebar-collapse .login-box {
+    display: none;
+}
+
+div#alertbanner {
+       position: absolute;
+       top: 0;
+       left: 0;
+       background-color: #E65100;
+       width: 100%;
+}
+div#alertbanner-content {
+       width: 800px;
+       margin: 0 auto;
+       padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+div#alertbanner a {
+    color: #fff;
+    text-decoration: underline;
+}
+body.alertbanner {
+    padding-top: 70px;
+}
+
+#tbl_domain_list th.link {
+    width: 2%;
+    padding-right: 0;
+}
+
+#tbl_domain_list th.link:after {
+    display: none;
+}
+
+.button_record_limit {
+    background-color: grey !important;
+    border-color: grey !important;
+}
+
+.editor-buttons {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+.editor-buttons a {
+    color: grey;
+    float: right;
+}
+
+a.menu-collapse, a.menu-collapse-admin, a.menu-collapse-user, a.menu-collapse-quicklink, a.menu-collapse-account {
+    display: inline-block;
+    float: right;
+    padding: 0 !important;
+}
+
+.domainpercentage {
+    height: 30px;
+    margin-top: 20px;
+}
+
+.domainpercentage .progress-bar {
+    line-height: 30px;
+}
+
+.table > thead > tr > th {
+    vertical-align: middle;
+}
+
+.table > tbody > tr > td {
+    padding: 3px;
+    vertical-align: middle;
+}
+
+.user-customize label {
+    display: block;
+}
+
+.select2-container {
+    width: 50% !important;
+}

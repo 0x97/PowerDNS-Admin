@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - Domain Management</title>{% endblock %}
+{% block title %}<title>Domain Management :: {{ site_name_setting }}</title>{% endblock %}
 {% block dashboard_stat %}
 <section class="content-header">
     <h1>
@@ -7,7 +7,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url_for('dashboard') }}"><i
-                class="fa fa-dashboard"></i> Home</a></li>
+                class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
         <li class="active">Domain Management</li>
     </ol>
 </section>
@@ -64,8 +64,7 @@
                 <div class="box-body">
                     <p><input type="checkbox" id="{{ domain.name }}" class="auto_ptr_toggle"
                          {% for setting in domain.settings %}{% if setting.setting=='auto_ptr' and setting.value=='True' %}checked{% endif %}{% endfor %} {% if auto_ptr_setting %}disabled="True"{% endif %}>
-                         &nbsp;Allow automatic reverse pointer creation on record updates?{% if
-                         auto_ptr_setting %}</br><code>Auto-ptr is enabled globally on the PDA system!</code>{% endif %}</p>
+                         &nbsp;Allow automatic reverse pointer creation on record updates?{% if auto_ptr_setting %}</br><code>Auto-ptr is enabled globally on the PDA system!</code>{% endif %}</p>
                     
                 </div>
             </div>
@@ -93,7 +92,7 @@
                     <h3 class="box-title">Domain Deletion</h3>
                 </div>
                 <div class="box-body">
-                    <p>This function is used to remove a domain from PowerDNS-Admin <b>AND</b> PowerDNS. All records and user privileges which associated to this domain will also be removed. This change cannot be reverted.</p>
+                    <p>This function is used to remove a domain from 0x97 Admin <b>AND</b> PowerDNS. All records and user privileges which associated to this domain will also be removed. This change cannot be reverted.</p>
                     <button type="button" class="btn btn-flat btn-danger pull-left delete_domain" id="{{ domain.name }}">
                         <i class="fa fa-trash"></i>&nbsp;DELETE DOMAIN {{ domain.name }}
                     </button>

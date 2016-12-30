@@ -1,37 +1,33 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - 500 Error</title>{% endblock %}
+{% block title %}<title>Error 500 :: {{ site_name_setting }}</title>{% endblock %}
 
 {% block dashboard_stat %}
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        500
-        <small>Error</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li>500</li>
-      </ol>
-    </section>
 {% endblock %}
 
 {% block content %}
 <!-- Main content -->
-<section class="content">
-    <div class="error-page">
-        <h2 class="headline text-yellow">500</h2>
-        <div class="error-content">
-            <h3>
-                <i class="fa fa-warning text-yellow"></i> Oops! Something went wrong
-            </h3>
-            <p>
-                Try again later.
-                You may <a href="{{ url_for('dashboard') }}">return to the dashboard</a>.
-            </p>
-        </div>
-        <!-- /.error-content -->
-    </div>
-    <!-- /.error-page -->
+    <style>
+        .content-wrapper {
+            display: flex;
+        }
+    </style>
+<section class="content error">
+    <div id="error">
+		<div>
+			<h1><strong>:(</strong></h1>
+			<h2>Internal Server Error<br/>
+                The server was unable to complete your request. Our developers have been alerted of this error and will look into it shortly.</h2>
+            <p>Why did this happen?</p>
+            <ul>
+                <li>Our servers are currently overloaded and were unable to process your request.</li>
+                <li>Something is misconfigured on one of our servers.</li>
+                <li>The internet is broken.</li>
+            </ul>
+            <p>Try reloading the page. If the issue persists, please contact <a href="mailto:dnsadmin@0x97.io">dnsadmin@0x97.io</a>.</p>
+
+            <h2>Error: 500_INTERNAL_SERVER_ERROR </h2>
+		</div>
+	</div>
 </section>
 <!-- /.content -->
 {% endblock %}

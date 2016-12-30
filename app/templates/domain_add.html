@@ -1,24 +1,46 @@
 {% extends "base.html" %}
-{% block title %}<title>DNS Control Panel - Add Domain</title>{% endblock %}
+{% block title %}<title>{{  menu_newdomain_text_language }} :: {{ site_name_setting }}</title>{% endblock %}
 
 {% block dashboard_stat %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Domain
-        <small>Create new</small>
+        {{  menu_newdomain_text_language }}
+        <small>Create new zone</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
         <li><a href="{{ url_for('dashboard') }}">Domain</a></li>
-        <li class="active">Add Domain</li>
+        <li class="active">{{  menu_newdomain_text_language }}</li>
       </ol>
     </section>
 {% endblock %}
 
+
 {% block content %}
-<section class="content">
-<div class="row">
+    <section class="content">
+    {% if current_user.role.name == 'User' %}
+    Domain limit: {{ user_domain_limit_setting }}<br/>
+    Your domain total: {{ domains|length }}
+    {% endif %}
+
+{% if current_user.role.name == 'User' and domains|length >= user_domain_limit_setting|int %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">You have reached your domain limit.</h3>
+                </div>
+                <div class="box-body">
+                    <p>Sorry, free users are limited to {{ user_domain_limit_setting }} domains. You cannot add more.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% else %}
+    <div class="row">
     <div class="col-md-4">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -26,12 +48,15 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
+
             <form role="form" method="post" action="{{ url_for('domain_add') }}">
                 <div class="box-body">
                     <div class="form-group">
                         <input type="text" class="form-control" name="domain_name" id="domain_name" placeholder="Enter a valid domain name (required)">
                     </div>
-                    <div class="form-group">
+
+                    {# Domain type is disabled on dns.0x97.io since we use MySQL replication. Remove the display:none before publishing our version of PDNS-Admin. #}
+                    <div class="form-group" style="display:none;">
                         <label>Type</label>
                         <div class="radio">
                             <label>
@@ -96,6 +121,7 @@
                     <button type="submit" class="btn btn-flat btn-default" onclick="window.location.href='{{ url_for('dashboard') }}'">Cancel</button>
                 </div>
             </form>
+
         </div>
         <!-- /.box -->
     </div>
@@ -107,21 +133,23 @@
             <div class="box-body">
                 <dl class="dl-horizontal">
                     <dt>Domain name</dt>
-                    <dd>Enter your domain name in the format of name.tld (eg. powerdns-admin.com). You can also enter sub-domains to create a sub-root zone (eg. sub.powerdns-admin.com) in case you want to delegate sub-domain management to specific users.</dd>
-                    <dt>Type</dt>
-                    <dd>The type decides how the domain will be replicated across multiple DNS servers.
-                        <ul>
-                            <li>
-                                Native - PowerDNS will not perform any replication. Use this if you only have one PowerDNS server or you handle replication via your backend (MySQL).
-                            </li>
-                            <li>
-                                Master - This PowerDNS server will serve as the master and will send zone transfers (AXFRs) to other servers configured as slaves.
-                            </li>
-                            <li>
-                                Slave - This PowerDNS server will serve as the slave and will request and receive zone transfers (AXFRs) from other servers configured as masters.
-                            </li>
-                        </ul>
-                    </dd>
+                    <dd>Enter your domain name in the format of name.tld (eg. 0x97.org). You can also enter sub-domains to create a sub-root zone (eg. sub.0x97.org) in case you want to delegate sub-domain management to specific users.</dd>
+
+                    {# Domain type is disabled on dns.0x97.io since we use MySQL replication. Uncomment this section before publishing our version of PDNS-Admin. #}
+{#                    <dt>Type</dt>#}
+{#                    <dd>The type decides how the domain will be replicated across multiple DNS servers.#}
+{#                        <ul>#}
+{#                            <li>#}
+{#                                Native - PowerDNS will not perform any replication. Use this if you only have one PowerDNS server or you handle replication via your backend (MySQL).#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                Master - This PowerDNS server will serve as the master and will send zone transfers (AXFRs) to other servers configured as slaves.#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                Slave - This PowerDNS server will serve as the slave and will request and receive zone transfers (AXFRs) from other servers configured as masters.#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </dd>#}
                     <dt>SOA-EDIT-API</dt>
                     <dd>The SOA-EDIT-API setting defines when and how the SOA serial number will be updated after a change is made to the domain.
                         <ul>
@@ -149,11 +177,13 @@
                         </ul>
                     </dd>
                 </dl>
-                <p>Find more details at <a href="https://docs.powerdns.com/md/">https://docs.powerdns.com/md/</a></p>
             </div>
         </div>
     </div>
 </div>
+
+{% endif %}
+
 </section>
 {% endblock %}
 {% block extrascripts %}

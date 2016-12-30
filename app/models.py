@@ -66,8 +66,10 @@ class User(db.Model):
     avatar = db.Column(db.String(128))
     otp_secret = db.Column(db.String(16))
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    css_skin = db.Column(db.String(128))
+    background_pattern = db.Column(db.String(128))
 
-    def __init__(self, id=None, username=None, password=None, plain_text_password=None, firstname=None, lastname=None, role_id=None, email=None, avatar=None, otp_secret=None, reload_info=True):
+    def __init__(self, id=None, username=None, password=None, plain_text_password=None, firstname=None, lastname=None, role_id=None, email=None, avatar=None, otp_secret=None, css_skin='green', background_pattern='diagmonds', reload_info=True):
         self.id = id
         self.username = username
         self.password = password
@@ -78,6 +80,8 @@ class User(db.Model):
         self.email = email
         self.avatar = avatar
         self.otp_secret = otp_secret
+        self.css_skin = css_skin
+        self.background_pattern = background_pattern
 
         if reload_info:
             user_info = self.get_user_info_by_id() if id else self.get_user_info_by_username()
@@ -90,6 +94,8 @@ class User(db.Model):
                 self.email = user_info.email
                 self.role_id = user_info.role_id
                 self.otp_secret = user_info.otp_secret
+                self.css_skin = user_info.css_skin
+                self.background_pattern = user_info.background_pattern
 
     def is_authenticated(self):
         return True
@@ -289,6 +295,8 @@ class User(db.Model):
         user.email = self.email if self.email else user.email
         user.password = self.get_hashed_password(self.plain_text_password) if self.plain_text_password else user.password
         user.avatar = self.avatar if self.avatar else user.avatar
+        user.css_skin = self.css_skin if self.css_skin else user.css_skin
+        user.background_pattern = self.background_pattern if self.background_pattern else user.background_pattern
 
         user.otp_secret = ""
         if enable_otp == True:
@@ -366,6 +374,55 @@ class User(db.Model):
             else:
                 return False
         except:
+            print traceback.format_exc()
+            db.session.roleback()
+            logging.error('Cannot change user role in DB')
+            logging.debug(traceback.format_exc())
+            return False
+
+    def set_suspended(self, is_suspended):
+        """
+        Set role for a user:
+            is_suspended == True  => Account Suspended
+            is_suspended == False => User
+        """
+        user_role_name = 'Suspended' if is_suspended else 'User'
+        role = Role.query.filter(Role.name==user_role_name).first()
+
+        try:
+            if role:
+                user = User.query.filter(User.username==self.username).first()
+                user.role_id = role.id
+                db.session.commit()
+                return True
+            else:
+                return False
+        except:
+            print traceback.format_exc()
+            db.session.roleback()
+            logging.error('Cannot change user role in DB')
+            logging.debug(traceback.format_exc())
+            return False
+
+    def set_premium(self, is_premium):
+        """
+        Set role for a user:
+            is_premium == True  => Premium Account
+            is_premium == False => User
+        """
+        user_role_name = 'Premium' if is_premium else 'User'
+        role = Role.query.filter(Role.name==user_role_name).first()
+
+        try:
+            if role:
+                user = User.query.filter(User.username==self.username).first()
+                user.role_id = role.id
+                db.session.commit()
+                return True
+            else:
+                return False
+        except:
+            print traceback.format_exc()
             db.session.roleback()
             logging.error('Cannot change user role in DB')
             logging.debug(traceback.format_exc())
@@ -602,6 +659,7 @@ class Domain(db.Model):
                 return {'status': 'error', 'msg': jdata['error']}
             else:
                 logging.info('Added domain %s successfully' % domain_name)
+                db.session.query(Domain.name == domain_name).first()
                 return {'status': 'ok', 'msg': 'Added domain successfully'}
         except Exception, e:
             print traceback.format_exc()
@@ -1282,6 +1340,61 @@ class History(db.Model):
             logging.debug(traceback.format_exc())
             return False
 
+class Language(db.Model):
+    # __tablename__ = 'language'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    value = db.Column(db.String(256))
+
+    def __init__(self, id=None, name=None, value=None):
+        self.id = id
+        self.name = name
+        self.value = value
+
+    # allow database autoincrement to do its own ID assignments
+    def __init__(self, id=None, name=None, value=None):
+        self.id = None
+        self.name = name
+        self.value = value
+
+    def toggle(self, language):
+        language = str(language)
+        current_language = Language.query.filter(Language.name==language).first()
+        try:
+            if current_language:
+                if current_language.value == "True":
+                    current_language.value = "False"
+                else:
+                    current_language.value = "True"
+                db.session.commit()
+                return True
+            else:
+                logging.error('Language string %s does not exist' % language)
+                return False
+        except:
+            logging.error('Cannot toggle language string %s' % language)
+            logging.debug(traceback.format_exec())
+            db.session.rollback()
+            return False
+
+    def set(self, language, value):
+        language = str(language)
+        new_value = str(value)
+        current_language = Language.query.filter(Language.name==language).first()
+        try:
+            if current_language:
+                current_language.value = new_value
+                db.session.commit()
+                return True
+            else:
+                logging.error('Language string %s does not exist' % language)
+                return False
+        except:
+            logging.error('Cannot edit language string %s' % language)
+            logging.debug(traceback.format_exec())
+            db.session.rollback()
+            return False
+
 class Setting(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(64))
@@ -1357,4 +1470,154 @@ class Setting(db.Model):
             logging.error('Cannot edit setting %s' % setting)
             logging.debug(traceback.format_exec())
             db.session.rollback()
+            return False
+
+
+class Page(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    title = db.Column(db.String(64))
+    url = db.Column(db.String(64))
+    icon = db.Column(db.String(64))
+    roles = db.Column(db.String(64))
+    published = db.Column(db.String(64))
+    content = db.Column(db.String(30000))
+
+
+    def __init__(self, id=None, name=None, title=None, url=None, icon='fa fa-globe', roles='User', published=True, content='Default content'):
+        self.id = id
+        self.name = name
+        self.title = title
+        self.url = url
+        self.icon = icon
+        self.roles = roles
+        self.published = published
+        self.content = content
+
+    # allow database autoincrement to do its own ID assignments
+    def __init__(self, id=None, name=None, title=None, url=None, icon='fa fa-globe', roles='User', published=True, content='Default content'):
+        self.id = id
+        self.name = name
+        self.title = title
+        self.url = url
+        self.icon = icon
+        self.roles = roles
+        self.published = published
+        self.content = content
+
+    def toggle(self, page):
+        page = str(page)
+        current_page = Page.query.filter(Page.name==page).first()
+        try:
+            if current_page:
+                if current_page.value == "True":
+                    current_page.value = "False"
+                else:
+                    current_page.value = "True"
+                db.session.commit()
+                return True
+            else:
+                logging.error('Page %s does not exist' % page)
+                return False
+        except:
+            logging.error('Cannot toggle page setting %s' % page)
+            logging.debug(traceback.format_exec())
+            db.session.rollback()
+            return False
+
+    def set(self, page, value):
+        page = str(page)
+        new_value = str(value)
+        current_page = Page.query.filter(Page.name==page).first()
+        try:
+            if current_page:
+                current_page.value = new_value
+                db.session.commit()
+                return True
+            else:
+                logging.error('Page %s does not exist' % page)
+                return False
+        except:
+            logging.error('Cannot edit page %s' % page)
+            logging.debug(traceback.format_exec())
+            db.session.rollback()
+            return False
+
+    def addpage(self, page_name, page_title, page_url, page_icon, page_roles, page_published, page_content):
+        """
+        Add a custom page
+        """
+
+        self.name = page_name
+        self.title = page_title
+        self.url = page_url
+        self.icon = page_icon
+        self.roles = page_roles
+        self.published = page_published
+        self.content = page_content
+
+        # check if page exists
+        name = Page.query.filter(Page.name == self.name).first()
+        if name:
+            return 'Page already exists!'
+
+        # check if URL exists
+        url = Page.query.filter(Page.url == self.url).first()
+        if url:
+            return 'URL already exists!'
+
+
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return {'status': 'ok', 'msg': 'Page created successfully'}
+
+        except:
+            logging.error('Cannot edit page %s' % page_name)
+            print traceback.format_exc()
+            db.session.rollback()
+            return False
+
+    def apply(self, page_id, page_name, page_title, page_url, page_icon, page_roles, page_published, page_content):
+        """
+        Update a custom page
+        """
+        self.id = page_id
+        self.name = page_name
+        self.title = page_title
+        self.url = page_url
+        self.icon = page_icon
+        self.roles = page_roles
+        self.published = page_published
+        self.content = page_content
+
+
+        current_page = Page.query.filter(Page.id == page_id).first()
+        try:
+            if current_page:
+                # data = {'page_title', 'page_url', 'page_icon', 'page_roles', 'page_published', 'page_content'}
+                db.session.merge(self)
+                db.session.commit()
+                return {'status': 'ok', 'msg': 'Page edited successfully'}
+            else:
+                logging.error('Page %s does not exist' % page_title)
+                return False
+        except:
+            logging.error('Cannot edit page %s' % page_title)
+            print traceback.format_exc()
+            db.session.rollback()
+            return False
+
+
+    def delete(self, page_id):
+        """
+        Delete a page
+        """
+        try:
+            Page.query.filter(Page.id == page_id).delete()
+            db.session.commit()
+            return {'status': 'ok', 'msg': 'Page deleted successfully'}
+        except:
+            db.session.rollback()
+            logging.error('Cannot delete page %s from DB' % self.page)
             return False

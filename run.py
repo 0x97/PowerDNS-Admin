@@ -9,3 +9,7 @@ except:
 
 if __name__ == '__main__':
     app.run(debug = True, host=BIND_ADDRESS, port=PORT)
+
+app.config.update(
+    PROPAGATE_EXCEPTIONS = True
+)

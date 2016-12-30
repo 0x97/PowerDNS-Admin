@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% block title %}<title>{{  menu_custompages_text_language }} :: {{ site_name_setting }}</title>{% endblock %}
+
+{% block dashboard_stat %}
+    <section class="content-header">
+        <h1>
+            {{  menu_custompages_text_language }}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard') }}"><i
+                    class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+            <li><a href="{{ url_for('admin') }}">{{  menu_adminconsole_text_language }}</a></li>
+            <li>{{  menu_custompages_text_language }}</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body">
+                        <a href="/admin/page/add">
+                            <button type="button" class="btn btn-flat btn-primary pull-left button_add_user">
+                                Add Page&nbsp;<i class="fa fa-plus"></i>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="box-body">
+                        <p>This page will contain various tools to create and manage custom pages within the DNS panel. While custom pages will be edited from the page itself, you will need to
+                            use this page to create the new pages first.</p>
+
+
+                        <table id="tbl_pages" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="link"><i class="fa fa-link"></i></th>
+                                <th>Page ID</th>
+                                <th>Page Name</th>
+                                <th>Page Title</th>
+                                <th>Authorized Roles</th>
+                                <th>Published</th>
+                                <th>Manage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for page in pages %}
+                                <tr class="odd gradeX">
+                                    <td class="link">
+                                        <a href="{{ base_url }}/{{ page.name }}" target="_blank"><i class="fa fa-link"></i></a>
+                                    </td>
+                                    <td>{{ page.id }}</td>
+                                    <td>{{ page.name }}</td>
+                                    <td><i class="{{ page.icon }}"></i> {{ page.title }}</td>
+                                    <td>{{ page.roles }}</td>
+                                    <td>{{ page.published }}</td>
+                                    <td width="6%">
+                                        <button type="button" class="btn btn-flat btn-success" onclick="window.location.href='{{ url_for('page_manage', page_id=page.id) }}'">
+                                            Edit&nbsp;<i class="fa fa-cog"></i>
+                                        </button>
+                                    </td>
+                                    <td width="6%">
+                                        <button type="button" class="btn btn-flat btn-danger pull-left delete_page" id="delete_page {{ page.id }}">
+                                            Delete <i class="fa fa-trash"></i>
+                                        </button>
+                                        {#                                    <button type="button" class="btn btn-flat btn-danger" onclick="window.location.href='{{ url_for('page_delete', page_id=page.id) }}'">#}
+                                        {#                                        Delete&nbsp;<i class="fa fa-trash"></i>#}
+                                        {#                                    </button>#}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+{% block extrascripts %}
+    <script>
+        // superglobals
+        window.nEditing = null;
+        window.nNew = false;
+
+        // set up user data table
+        $("#tbl_pages").DataTable({
+            "paging" : true,
+            "lengthChange" : false,
+            "searching" : true,
+            "ordering" : true,
+            "info" : true,
+            "autoWidth" : false
+        });
+
+        // handle deletion of page
+        $(document.body).on('click', '#delete_page', function() {
+            var modal = $("#modal_delete_page");
+            var page = $(this).prop('id');
+            var info = "Are you sure you want to delete " + page + "?";
+            modal.find('.modal-body p').text(info);
+            modal.find('#button_delete_confirm').click(function() {
+                $.get($SCRIPT_ROOT + '/admin/page/' + page + '/delete', function() {
+                    window.location.href = '{{ url_for('dashboard') }}';
+                });
+                modal.modal('hide');
+            })
+            modal.modal('show');
+
+        });
+        // handle edit button
+        $(document.body).on("click", ".button_edit, .row_record", function(e) {
+            e.stopPropagation();
+            if ($(this).is('tr')) {
+                var nRow = $(this)[0];
+            } else {
+                var nRow = $(this).parents('tr')[0];
+            }
+            var table = $("#tbl_pages").DataTable();
+
+            if (nEditing == nRow) {
+                /* click on row already being edited, do nothing */
+            } else if (nEditing !== null && nEditing != nRow && nNew == false) {
+                /* Currently editing - but not this row - restore the old before continuing to edit mode */
+                restoreRow(table, nEditing);
+                editRow(table, nRow);
+                nEditing = nRow;
+            } else if (nNew == true) {
+                /* adding a new row, delete it and start editing */
+                table.row(nEditing).remove().draw();
+                nNew = false;
+                editRow(table, nRow);
+                nEditing = nRow;
+            } else {
+                /* No edit in progress - let's start one */
+                editRow(table, nRow);
+                nEditing = nRow;
+            }
+        });
+
+        // handle apply changes button
+        $(document.body).on("click",".button_apply_changes", function() {
+            var modal = $("#modal_apply_changes");
+            var table = $("#tbl_records").DataTable();
+            var domain = $(this).prop('id');
+            var info = "Are you sure you want to apply your changes?";
+            modal.find('.modal-body p').text(info);
+            modal.find('#button_apply_confirm').click(function() {
+                var data = getTableData(table);
+                applyChanges(data, $SCRIPT_ROOT + '/domain/' + domain + '/apply', true);
+                modal.modal('hide');
+            })
+            modal.modal('show');
+
+        });
+
+        //handle cancel button
+        $(document.body).on("click", ".button_cancel", function (e) {
+            e.stopPropagation();
+            var oTable = $("#tbl_records").DataTable();
+            if (nNew) {
+                oTable.row(nEditing).remove().draw();
+                nEditing = null;
+                nNew = false;
+            } else {
+                restoreRow(oTable, nEditing);
+                nEditing = null;
+            }
+        });
+
+    </script>
+{% endblock %}
+{% block modals %}
+    <div class="modal fade modal-warning" id="modal_delete_page">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-flat btn-default pull-left"
+                            data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-flat btn-danger" id="button_delete_confirm">Delete</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade modal-primary" id="modal_apply_changes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-flat btn-default pull-left"
+                            data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-flat btn-primary" id="button_apply_confirm">Apply</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade modal-primary" id="modal_custom_record">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Custom Record</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-flat btn-primary" id="button_save">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+{% endblock %}

@@ -1,89 +1,263 @@
 {% extends "base.html" %} {% block title %}
-<title>DNS Control Panel - Settings</title>
+    <title>{{  menu_globalsettings_text_language }} :: {{ site_name_setting }}</title>
 {% endblock %} {% block dashboard_stat %}
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>
-        Settings <small>PowerDNS-Admin settings</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ url_for('dashboard') }}"><i
-                class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Settings</li>
-    </ol>
-</section>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {{  menu_globalsettings_text_language }} <small>{{ site_name_setting }} settings</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard') }}"><i
+                    class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+            <li><a href="{{ url_for('admin') }}">{{  menu_adminconsole_text_language }}</a></li>
+            <li class="active">{{  menu_globalsettings_text_language }}</li>
+        </ol>
+    </section>
 {% endblock %} {% block content %}
-<section class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Settings Management</h3>
-                </div>
-                <div class="box-body">
-                    <table id="tbl_settings" class="table table-bordered table-striped">
-                        <thead>
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">{{  menu_globalsettings_text_language }} Management</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="tbl_settings" class="table table-bordered table-striped">
+                            <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Value</th>
                                 <th>Change</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             {% for setting in settings %}
-                            <tr class="odd ">
-                                <td>{{ setting.name }}</td>
-                                {% if setting.value == "True" or setting.value == "False" %}
-                                <td>{{ setting.value }}</td>
-                                {% else %}
-                                <td><input name="value" id="value" value="{{ setting.value }}"></td>
-                                {% endif %}
-                                <td width="6%">
+                                <tr class="odd ">
+                                    <td>{{ setting.name }}</td>
                                     {% if setting.value == "True" or setting.value == "False" %}
-                                    <button type="button" class="btn btn-flat btn-warning setting-toggle-button" id="{{ setting.name }}">
-                                        Toggle&nbsp;<i class="fa fa-info"></i>
-                                    </button>
+                                        <td>{{ setting.value }}</td>
+                                    {% elif setting.name == 'background_pattern' %}
+                                        <td><select name="value" id="value" class="background_pattern">
+                                            <option value="{{ setting.value }}">{{ setting.value }}</option>
+                                            <optgroup label="gradients">
+                                                <option value="ibiza">Ibiza</option>
+                                                <option value="cosmic_fusion">Cosmic Fusion</option>
+                                                <option value="royal">Royal</option>
+                                                <option value="dark_skies">Dark Skies</option>
+                                                <option value="deep_purple">Deep Purple</option>
+                                                <option value="twitch">Twitch</option>
+                                                <option value="soundcloud">Soundcloud</option>
+                                                <option value="strain">Strain</option>
+                                                <option value="kyoto">Kyoto</option>
+                                                <option value="pinot_noir">Pinot Noir</option>
+                                                <option value="bloody_mary">Bloody Mary</option>
+                                                <option value="harmonic_energy">Harmonic Energy</option>
+                                                <option value="easymed">Easymed</option>
+                                                <option value="lush">Lush</option>
+                                                <option value="behongo">Behongo</option>
+                                            </optgroup>
+
+                                            <optgroup label="patterns">
+                                                <option value="asanoha">asanoha</option>
+                                                <option value="batthern">batthern</option>
+                                                <option value="black_thread">black_thread</option>
+                                                <option value="broken_noise">broken_noise</option>
+                                                <option value="candyhole">candyhole</option>
+                                                <option value="carbon_fibre_big">carbon_fibre_big</option>
+                                                <option value="checkered_pattern">checkered_pattern</option>
+                                                <option value="classy_fabric">classy_fabric</option>
+                                                <option value="connect">connect</option>
+                                                <option value="dark_matter">dark_matter</option>
+                                                <option value="dark_wood">dark_wood</option>
+                                                <option value="darkdenim3">darkdenim3</option>
+                                                <option value="denim">denim</option>
+                                                <option value="diagmonds">diagmonds</option>
+                                                <option value="dvsup">dvsup</option>
+                                                <option value="fabric_plaid">fabric_plaid</option>
+                                                <option value="fake_brick">fake_brick</option>
+                                                <option value="foggy_birds">foggy_birds</option>
+                                                <option value="foil">foil</option>
+                                                <option value="graphy">graphy</option>
+                                                <option value="gridme">gridme</option>
+                                                <option value="grilled">grilled</option>
+                                                <option value="groovepaper">groovepaper</option>
+                                                <option value="gun_metal">gun_metal</option>
+                                                <option value="hxis_pattern_evolution">hxis_pattern_evolution</option>
+                                                <option value="irongrip">irongrip</option>
+                                                <option value="knitted-netting">knitted-netting</option>
+                                                <option value="light_grey_floral_motif">light_grey_floral_motif</option>
+                                                <option value="lined_paper">lined_paper</option>
+                                                <option value="merely_cubed">merely_cubed</option>
+                                                <option value="nami">nami</option>
+                                                <option value="old_wall">old_wall</option>
+                                                <option value="pineapplecut">pineapplecut</option>
+                                                <option value="plaid">plaid</option>
+                                                <option value="polonez_car">polonez_car</option>
+                                                <option value="px_by_Gre3g">px_by_Gre3g</option>
+                                                <option value="ravenna">ravenna</option>
+                                                <option value="ricepaper">ricepaper</option>
+                                                <option value="ricepaper2">ricepaper2</option>
+                                                <option value="seigaiha">seigaiha</option>
+                                                <option value="small-crackle-bright">small-crackle-bright</option>
+                                                <option value="soft_pad">soft_pad</option>
+                                                <option value="starring">starring</option>
+                                                <option value="struckaxiom">struckaxiom</option>
+                                                <option value="texturetastic_gray">texturetastic_gray</option>
+                                                <option value="vertical_cloth">vertical_cloth</option>
+                                                <option value="white_brick_wall">white_brick_wall</option>
+                                                <option value="white_paperboard">white_paperboard</option>
+                                                <option value="white_plaster">white_plaster</option>
+                                                <option value="whitediamond">whitediamond</option>
+                                                <option value="wood_pattern">wood_pattern</option>
+                                                <option value="zigzag">zigzag</option>
+                                            </optgroup>
+
+                                        </select></td>
+                                    {% elif setting.name == 'css_skin' %}
+                                        <td><select name="value" id="value" class="css_skin">
+                                            <option value="{{ setting.value }}">{{ setting.value }}</option>
+                                            <option value="custom">custom</option>
+                                            <option value="black">black</option>
+                                            <option value="black-light">black-light</option>
+                                            <option value="blue">blue</option>
+                                            <option value="blue-blue">blue-blue</option>
+                                            <option value="blue-light">blue-light</option>
+                                            <option value="green">green</option>
+                                            <option value="green-green">green-green</option>
+                                            <option value="green-light">green-light</option>
+                                            <option value="purple">purple</option>
+                                            <option value="purple-purple">purple-purple</option>
+                                            <option value="purple-light">purple-light</option>
+                                            <option value="red">red</option>
+                                            <option value="red-red">red-red</option>
+                                            <option value="red-light">red-light</option>
+                                            <option value="yellow">yellow</option>
+                                            <option value="yellow-yellow">yellow-yellow</option>
+                                            <option value="yellow-light">yellow-light</option>
+                                        </select></td>
+                                    {% elif setting.name == 'homepage_text' %}
+                                        <td><textarea name="value" id="value" rows="8" cols="20">{{ setting.value }}</textarea></td>
                                     {% else %}
-                                    <button type="button" class="btn btn-flat btn-warning setting-save-button" id="{{ setting.name }}">
-                                        Save&nbsp;<i class="fa fa-info"></i>
-                                    </button>
+                                        <td><input name="value" id="value" value="{{ setting.value }}"></td>
                                     {% endif %}
-                                </td>
-                            </tr>
+                                    <td width="6%">
+                                        {% if setting.value == "True" or setting.value == "False" %}
+                                            <button type="button" class="btn btn-flat btn-warning setting-toggle-button" id="{{ setting.name }}">
+                                                Toggle&nbsp;<i class="fa fa-info"></i>
+                                            </button>
+                                        {% else %}
+                                            <button type="button" class="btn btn-flat btn-warning setting-save-button" id="{{ setting.name }}">
+                                                Save&nbsp;<i class="fa fa-info"></i>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
                             {% endfor %}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
+                <!-- /.box -->
             </div>
-            <!-- /.box -->
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Help with settings options</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <dl class="dl-horizontal dl-settings-help">
+                            <dt>admin_email</dt>
+                            <dd>Sets the administrative contact email.</dd>
+
+                            <dt>auto_ptr</dt>
+                            <dd>Automatically set PTR records on new domains.</dd>
+
+                            <dt>background_pattern</dt>
+                            <dd>When fullscreen_layout is set to True, this option allows you to change the background
+                                pattern.</dd>
+
+                            <dt>css_skin</dt>
+                            <dd>Changes the color scheme of 0x97DNS-Admin. Most color options include a light variant
+                                and a color-color variant, which sets the sidebar to the selected color as well.
+                                Selecting 'custom' will add a Theme Settings menu option where you can choose custom
+                                colors, fonts, and override several default text values throughout the app.
+                            </dd>
+
+                            <dt>custom_language</dt>
+                            <dd>Enables the 'Custom Language Strings' settings page, which allows you to change various
+                            text strings throughout the app. Menu items, help text, footer text, etc can all be
+                            customized here.</dd>
+
+                            <dt>custom_pages</dt>
+                            <dd>Enables the 'Custom Pages' settings page, allowing administrators to create custom
+                            pages and manage various settings pertaining to them.</dd>
+
+                            <dt>default_domain_table_size</dt>
+                            <dd>Sets the default number of domains to show per page in the 'Hosted Domains' table. The
+                                default is 25, but any integer will work.</dd>
+
+                            <dt>default_record_table_size</dt>
+                            <dd>Sets the default number of records to show per page. This is 30 by default, but you can
+                                safely change it to any number you prefer.</dd>
+
+                            <dt>fullscreen_layout</dt>
+                            <dd>Toggles between full width and fluid width. Additional customization options may be
+                                added in the future, such as the ability to upload a custom background image.</dd>
+
+                            <dt>homepage_text</dt>
+                            <dd>Sets the text on the homepage and about page. Plaintext and HTML are accepted here.</dd>
+
+                            <dt>login_ldap_first</dt>
+                            <dd>If you are using LDAP authentication, setting this to True causes the login form to
+                                default to LDAP rather than local authentication.</dd>
+
+                            <dt>record_helper</dt>
+                            <dd>Enables or disables the record helper, a modal that pops up when various DNS zones
+                            are edited. Assists the user in properly formatting their data, rather than having to
+                            know the correct syntax for every DNS zone type.</dd>
+
+                            <dt>signup_enabled</dt>
+                            <dd>Toggles user registration- set this to false to remove the registration box, and
+                                instead display a notice to users alerting them that signups are not allowed.</dd>
+
+                            <dt>site_name</dt>
+                            <dd>Sets the site name, used in page titles and the logo block.</dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section>
-{% endblock %} 
+        <!-- /.row -->
+    </section>
+{% endblock %}
 {% block extrascripts %}
-<script>
-    // set up history data table
-    $("#tbl_settings").DataTable({
-        "paging" : true,
-        "lengthChange" : false,
-        "searching" : true,
-        "ordering" : true,
-        "info" : true,
-        "autoWidth" : false
-    });
-    $(document.body).on('click', '.setting-toggle-button', function() {
-        var setting = $(this).prop('id');
-        applyChanges('', $SCRIPT_ROOT + '/admin/setting/' + setting + '/toggle', false, true)
-    });
-    
-    $(document.body).on('click', '.setting-save-button', function() {
-        var setting = $(this).prop('id');
-        var value = $(this).parents('tr').find('#value')[0].value;
-        var postdata = {'value': value};
-        applyChanges(postdata, $SCRIPT_ROOT + '/admin/setting/' + setting + '/edit', false, true)
-    });
-</script>
+    <script>
+        // set up history data table
+        $("#tbl_settings").DataTable({
+            "paging" : true,
+            "lengthChange" : true,
+            "searching" : true,
+            "ordering" : true,
+            "info" : true,
+            "autoWidth" : false
+        });
+        $(document.body).on('click', '.setting-toggle-button', function() {
+            var setting = $(this).prop('id');
+            applyChanges('', $SCRIPT_ROOT + '/admin/setting/' + setting + '/toggle', false, true)
+        });
+
+        $(document.body).on('click', '.setting-save-button', function() {
+            var setting = $(this).prop('id');
+            var value = $(this).parents('tr').find('#value')[0].value;
+            var postdata = {'value': value};
+            applyChanges(postdata, $SCRIPT_ROOT + '/admin/setting/' + setting + '/edit', false, true)
+        });
+        $(document).ready(function() {
+            $(".background_pattern").select2();
+            $(".css_skin").select2();
+        });
+    </script>
 {% endblock %} 

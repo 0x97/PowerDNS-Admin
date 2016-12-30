@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% block title %}
+    <title>Page Editor :: {{ site_name_setting }}</title>
+{% endblock %} {% block dashboard_stat %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Page Editor <small>{{ site_name_setting }} custom content</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('dashboard') }}"><i
+                    class="fa fa-dashboard"></i> {{ site_name_setting }}</a></li>
+            <li><a href="{{ url_for('admin') }}">{{  menu_adminconsole_text_language }}</a></li>
+            <li class="active">Page Editor</li>
+        </ol>
+    </section>
+{% endblock %} {% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">{{ page.title }} Management</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <table id="tbl_settings tbl_other_strings" class="table table-bordered table-striped">
+                            <thead>
+                            <tr><th colspan="4">General Page Settings</th></tr>
+                            <tr>
+                                <th>Page Name</th>
+                                <th>Page Title</th>
+                                <th>Relative URL</th>
+                                <th>Icon</th>
+                                <th>Save</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd ">
+                                <td><input name="value" id="value" value="{{ page.name }}"></td>
+                                <td><input name="value" id="value" value="{{ page.title }}"></td>
+                                <td><input name="value" id="value" value="{{ page.url }}"></td>
+                                <td><input name="value" id="value" value="{{ page.icon }}"></td>
+                                <td width="6%">
+                                    <button type="button" class="btn btn-flat btn-warning setting-save-button" id="{{ page.name }}">
+                                        Save&nbsp;<i class="fa fa-info"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br/><br/>
+                        <table id="" class="table table-bordered table-striped">
+                            <thead>
+                            <th>Roles (leave blank for public)</th>
+                            <th>Published</th>
+                            <th>Save</th>
+                            </thead>
+                            <tbody>
+                            <tr class="odd ">
+                                <td><input name="value" id="value" value="{{ page.roles }}"></td>
+                                <td><input name="value" id="value" value="{{ page.published }}"></td>
+                                <td width="6%">
+                                    <button type="button" class="btn btn-flat btn-warning setting-save-button" id="{{ page.name }}">
+                                        Save&nbsp;<i class="fa fa-info"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+{% block extrascripts %}
+    <script>
+        // set up history data table
+        $("#tbl_settings").DataTable({
+            "paging" : true,
+            "lengthChange" : false,
+            "searching" : true,
+            "ordering" : true,
+            "info" : true,
+            "autoWidth" : false
+        });
+        $(document.body).on('click', '.setting-toggle-button', function() {
+            var setting = $(this).prop('id');
+            applyChanges('', $SCRIPT_ROOT + '/admin/{{ page.url }}/edit' + setting + '/toggle', false, true)
+        });
+
+        $(document.body).on('click', '.setting-save-button', function() {
+            var setting = $(this).prop('id');
+            var value = $(this).parents('tr').find('#value')[0].value;
+            var postdata = {'value': value};
+            applyChanges(postdata, $SCRIPT_ROOT + '/admin/{{ page.url }}/edit' + setting + '/save', false, true)
+        });
+
+        $(document).ready(function() {
+            $('[data-toggle="toggle"]').change(function(){
+                $(this).parents().next('.hide-table').toggle();
+            });
+        });
+
+        $('td.setting-name').html(function (i, t) {
+            return t.replace('menu_', '<span class="hidden">menu_</span>');
+        })
+    </script>
+{% endblock %}

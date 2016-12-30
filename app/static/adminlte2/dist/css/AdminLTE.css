@@ -47,9 +47,251 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   position: relative;
 }
-.layout-boxed {
-  background: url('../img/boxed-bg.jpg') repeat fixed;
+
+
+
+
+/* Background pattern classes */
+.default {
+  background: url('../img/patterns/boxed-bg.png') repeat fixed;
 }
+.seigaiha {
+  background: url('../img/patterns/seigaiha.png') repeat fixed;
+}
+.asanoha {
+  background: url('../img/patterns/asanoha.png') repeat fixed;
+}
+.batthern {
+  background: url('../img/patterns/batthern.png') repeat fixed;
+}
+.black_thread {
+  background: url('../img/patterns/black_thread.png') repeat fixed;
+}
+.broken_noise {
+  background: url('../img/patterns/broken_noise.png') repeat fixed;
+}
+.candyhole {
+  background: url('../img/patterns/candyhole.png') repeat fixed;
+}
+.carbon_fibre_big {
+  background: url('../img/patterns/carbon_fibre_big.png') repeat fixed;
+}
+.checkered_pattern {
+  background: url('../img/patterns/checkered_pattern.png') repeat fixed;
+}
+.classy_fabric {
+  background: url('../img/patterns/classy_fabric.png') repeat fixed;
+}
+.connect {
+  background: url('../img/patterns/connect.png') repeat fixed;
+}
+.dark_matter {
+  background: url('../img/patterns/dark_matter.png') repeat fixed;
+}
+.dark_wood {
+  background: url('../img/patterns/dark_wood.png') repeat fixed;
+}
+.darkdenim3 {
+  background: url('../img/patterns/darkdenim3.png') repeat fixed;
+}
+.denim {
+  background: url('../img/patterns/denim.png') repeat fixed;
+}
+.diagmonds {
+  background: url('../img/patterns/diagmonds.png') repeat fixed;
+}
+.dvsup {
+  background: url('../img/patterns/dvsup.png') repeat fixed;
+}
+.fabric_plaid {
+  background: url('../img/patterns/fabric_plaid.png') repeat fixed;
+}
+.fake_brick {
+  background: url('../img/patterns/fake_brick.png') repeat fixed;
+}
+.foggy_birds {
+  background: url('../img/patterns/foggy_birds.png') repeat fixed;
+}
+.foil {
+  background: url('../img/patterns/foil.png') repeat fixed;
+}
+.graphy {
+  background: url('../img/patterns/graphy.png') repeat fixed;
+}
+.gridme {
+  background: url('../img/patterns/gridme.png') repeat fixed;
+}
+.grilled {
+  background: url('../img/patterns/grilled.png') repeat fixed;
+}
+.groovepaper {
+  background: url('../img/patterns/groovepaper.png') repeat fixed;
+}
+.gun_metal {
+  background: url('../img/patterns/gun_metal.png') repeat fixed;
+}
+.hixs_pattern_evolution {
+  background: url('../img/patterns/hixs_pattern_evolution.png') repeat fixed;
+}
+.irongrip {
+  background: url('../img/patterns/irongrip.png') repeat fixed;
+}
+.knitted-netting {
+  background: url('../img/patterns/knitted-netting.png') repeat fixed;
+}
+.light_grey_floral_motif {
+  background: url('../img/patterns/light_grey_floral_motif.png') repeat fixed;
+}
+.lined_paper {
+  background: url('../img/patterns/lined_paper.png') repeat fixed;
+}
+.merely_cubed {
+  background: url('../img/patterns/merely_cubed.png') repeat fixed;
+}
+.nami {
+  background: url('../img/patterns/nami.png') repeat fixed;
+}
+.old_wall {
+  background: url('../img/patterns/old_wall.png') repeat fixed;
+}
+.pineapplecut {
+  background: url('../img/patterns/pineapplecut.png') repeat fixed;
+}
+.plaid {
+  background: url('../img/patterns/plaid.png') repeat fixed;
+}
+.polonez_car {
+  background: url('../img/patterns/polonez_car.png') repeat fixed;
+}
+.px_by_Gre3g {
+  background: url('../img/patterns/px_by_Gre3g.png') repeat fixed;
+}
+.ravenna {
+  background: url('../img/patterns/ravenna.png') repeat fixed;
+}
+.ricepaper {
+  background: url('../img/patterns/ricepaper.png') repeat fixed;
+}
+.ricepaper2 {
+  background: url('../img/patterns/ricepaper2.png') repeat fixed;
+}
+.small-crackle-bright {
+  background: url('../img/patterns/small-crackle-bright.png') repeat fixed;
+}
+.soft_pad {
+  background: url('../img/patterns/soft_pad.png') repeat fixed;
+}
+.starring {
+  background: url('../img/patterns/starring.png') repeat fixed;
+}
+.struckaxiom {
+  background: url('../img/patterns/struckaxiom.png') repeat fixed;
+}
+.texturetastic_gray {
+  background: url('../img/patterns/texturetastic_gray.png') repeat fixed;
+}
+.vertical_cloth {
+  background: url('../img/patterns/vertical_cloth.png') repeat fixed;
+}
+.white_brick_wall {
+  background: url('../img/patterns/white_brick_wall.png') repeat fixed;
+}
+.white_paperboard {
+  background: url('../img/patterns/white_paperboard.png') repeat fixed;
+}
+.white_plaster {
+  background: url('../img/patterns/white_plaster.png') repeat fixed;
+}
+.whitediamond {
+  background: url('../img/patterns/whitediamond.png') repeat fixed;
+}
+.wood_pattern {
+  background: url('../img/patterns/wood_pattern.png') repeat fixed;
+}
+.zigzag {
+  background: url('../img/patterns/zigzag.png') repeat fixed;
+}
+
+.ibiza {
+  background: #ee0979; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ee0979 , #ff6a00); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ee0979 , #ff6a00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.cosmic_fusion {
+  background: #ff00cc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ff00cc , #333399); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ff00cc , #333399); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.royal {
+background: #141E30; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #141E30 , #243B55); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #141E30 , #243B55); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.dark_skies {
+background: #4B79A1; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #4B79A1 , #283E51); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #4B79A1 , #283E51); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.deep_purple {
+background: #673AB7; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #673AB7 , #512DA8); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #673AB7 , #512DA8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twitch {
+background: #6441A5; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #6441A5 , #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #6441A5 , #2a0845); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.soundcloud {
+background: #fe8c00; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #fe8c00 , #f83600); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #fe8c00 , #f83600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.strain {
+background: #870000; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #870000 , #190A05); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #870000 , #190A05); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.kyoto {
+background: #c21500; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #c21500 , #ffc500); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #c21500 , #ffc500); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.pinot_noir {
+background: #4b6cb7; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #4b6cb7 , #182848); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #4b6cb7 , #182848); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bloody_mary {
+background: #FF512F; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #FF512F , #DD2476); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #FF512F , #DD2476); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.harmonic_energy {
+background: #16A085; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #16A085 , #F4D03F); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.easymed {
+background: #DCE35B; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #DCE35B , #45B649); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #DCE35B , #45B649); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.lush {
+background: #56ab2f; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #56ab2f , #a8e063); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #56ab2f , #a8e063); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.behongo {
+background: #52c234; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #52c234 , #061700); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #52c234 , #061700); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* End background pattern classes */
+
+
+
 /*
  * Content Wrapper - contains the main content
  * ```.right-side has been deprecated as of v2.0.0 in favor of .content-wrapper  ```
@@ -655,10 +897,13 @@ a:focus {
   }
 }
 .sidebar-menu,
-.main-sidebar .user-panel,
-.sidebar-menu > li.header {
+.main-sidebar .user-panel{
   white-space: nowrap;
   overflow: hidden;
+}
+.sidebar-menu > li.header {
+  overflow: hidden;
+  white-space: normal;
 }
 .sidebar-menu:hover {
   overflow: visible;
@@ -3213,8 +3458,8 @@ table.text-center th {
 }
 .login-box,
 .register-box {
-  width: 360px;
-  margin: 7% auto;
+  /*width: 360px;*/
+  margin: auto;
 }
 @media (max-width: 768px) {
   .login-box,
@@ -4407,7 +4652,7 @@ table.text-center th {
 .alert-info,
 .label-info,
 .modal-info .modal-body {
-  background-color: #00c0ef !important;
+  background-color: #00c0ef;
 }
 .bg-blue {
   background-color: #0073b7 !important;
